@@ -127,7 +127,7 @@ a:hover {
 .dropdown-label {
   cursor: pointer;
   user-select: none;
-  font-weight: bold;
+  font-weight: normal;
   padding: 0.5rem;
   display: inline-block;
 }
