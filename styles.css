@@ -184,7 +184,7 @@ a:hover {
 .intro-text {
   max-width: 800px;
   margin: 0 auto 3rem auto;
-  padding: 2rem 2.5rem;
+  padding: 2.5rem 2.5rem 2rem 2.5rem;
   background: linear-gradient(135deg, rgba(43, 24, 194, 0.03), rgba(122, 63, 241, 0.06));
   border-radius: 16px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
