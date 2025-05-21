@@ -351,6 +351,20 @@ iframe {
   font-size: 0.85rem;
 }
 
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0 0;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.footer-links li {
+  margin: 0;
+  padding: 0;
+}
+
 /* =========================
    ✨ Animations
    ========================= */
