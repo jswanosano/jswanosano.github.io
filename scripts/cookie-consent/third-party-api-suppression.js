@@ -29,7 +29,7 @@ fetch('https://ipinfo.io/json?token=09a57283894e52')
 
       // Load Osano
       const osanoScript = document.createElement('script');
-      osanoScript.src = 'https://cmp.osano.com/AzZcpvRm9bbsqngN/5cd0582e-bdad-4a5c-8484-356e17bbbe1e/osano.js';
+      osanoScript.src = 'https://cmp.osano.com/AzZcpvRm9bbsqngN/9a87dd5e-e1f7-4263-8666-6565274cb599/osano.js';
       osanoScript.async = true;
       document.head.appendChild(osanoScript);
     } else {
