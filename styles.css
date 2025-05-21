@@ -127,9 +127,15 @@ a:hover {
 .dropdown-label {
   cursor: pointer;
   user-select: none;
-  font-weight: normal;
+  font-weight: 500;
   padding: 0.5rem;
   display: inline-block;
+  color: white;
+  font-family: var(--font-heading);
+}
+
+.dropdown-label:hover {
+  color: var(--emerald);
 }
 
 .dropdown-menu {
