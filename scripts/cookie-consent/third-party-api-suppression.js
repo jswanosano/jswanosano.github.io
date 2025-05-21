@@ -14,7 +14,7 @@ fetch('https://ipinfo.io/json?token=09a57283894e52')
 
     const allowedRegions = [
       'US-CALIFORNIA', 'US-COLORADO', 'US-CONNECTICUT', 'US-VIRGINIA', 'US-UTAH',
-      'US-TEXAS', 'US-OREGON', 'US-MONTANA', 'US-IOWA', 'US-NEW_HAMPSHIRE',
+      'US-OREGON', 'US-MONTANA', 'US-IOWA', 'US-NEW_HAMPSHIRE',
       'US-DELAWARE', 'US-NEW_JERSEY', 'US-NEBRASKA'
     ];
 
