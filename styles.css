@@ -358,11 +358,21 @@ iframe {
   display: flex;
   justify-content: center;
   gap: 1.5rem;
+  align-items: center;
 }
 
 .footer-links li {
   margin: 0;
   padding: 0;
+  position: relative;
+}
+
+.footer-links li:not(:last-child)::after {
+  content: "|";
+  position: absolute;
+  right: -0.9rem;
+  color: rgba(255, 255, 255, 0.4);
+  pointer-events: none;
 }
 
 /* =========================
