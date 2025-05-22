@@ -3,6 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="Content-Security-Policy" content="
+        script-src 'self' https://*.osano.com https://my.datasubject.com https://ipinfo.io blob: 'unsafe-inline'; 
+        style-src 'self' 'unsafe-inline' https://*.osano.com https://my.datasubject.com https://ipinfo.io; 
+        frame-src 'self' https://*.osano.com https://my.datasubject.com unifiedconsent.osano.com https://ipinfo.io; 
+        connect-src 'self' https://*.osano.com https://my.datasubject.com https://ipinfo.io; 
+        worker-src 'self' blob:;
+        frame-ancestors 'self' jswanosano.github.io;">
   <title>Unified Consent</title>
   <link rel="stylesheet" href="../styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
