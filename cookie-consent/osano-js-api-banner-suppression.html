@@ -52,14 +52,14 @@
 
     <section class="location-debug">
       <h2>Banner Visibility Debug Info</h2>
-      <p>We have set the banner to be hidden if you access the site from California, Connecticut, and Canada. The banner should be visible for all other locations. The suppressed/visible locations are customizable.</p>
+      <p>We have set the banner to be hidden if you access the site from California, Connecticut, Texasand Canada. The banner should be visible for all other locations. The suppressed/visible locations are customizable.</p>
       <p><strong>Jurisdiction:</strong> <span id="jurisdiction">Detecting...</span></p>
       <p><strong>Banner Visibility:</strong> <span id="banner-status">Checking...</span></p>
     </section>
 
     <section class="about">
       <h2>Implementation Details & Caveats</h2>
-      <p>This example hides the Osano banner for all users by default using CSS. Once the user's location is determined, a script checks whether the banner should be displayed. If the user is in a jurisdiction where privacy legislation is active, the script modifies the page’s CSS to reveal the banner and programmatically calls `Osano.cm.showDialog()`.</p>
+      <p>This example hides the Osano banner for users in the specified jurisdictions by default using CSS. Once the user's location is determined, a script checks whether the banner should be displayed. If the user is in a jurisdiction that isn't specified, the script modifies the page’s CSS to reveal the banner and programmatically calls `Osano.cm.showDialog()`.</p>
 
       <p>This implementation is intended for advanced users who want to suppress the banner in U.S. states that currently lack applicable privacy legislation. It is **not recommended by Osano**, and using it may compromise your compliance posture.</p>
 

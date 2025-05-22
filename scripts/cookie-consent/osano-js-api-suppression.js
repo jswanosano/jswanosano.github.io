@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const suppressedJurisdictions = ["us-ca", "us-ct", "ca"];
+  const suppressedJurisdictions = ["us-ca", "us-ct", "ca", "us-tx"];
 
   // 🔽 NEW: Grab HTML elements for debug info
   const jurisdictionSpan = document.getElementById("jurisdiction");
