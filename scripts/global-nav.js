@@ -40,7 +40,12 @@ function highlightCurrentPage() {
   
   // Check each link to see if it matches the current path
   navLinks.forEach(link => {
-    if (link.getAttribute('href') === currentPath) {
+    const linkPath = link.getAttribute('href');
+    // Remove trailing slash and .html extension for comparison
+    const normalizedLinkPath = linkPath.replace(/\/$/, '').replace(/\.html$/, '');
+    const normalizedCurrentPath = currentPath.replace(/\/$/, '').replace(/\.html$/, '');
+    
+    if (normalizedLinkPath === normalizedCurrentPath) {
       link.classList.add('active');
       
       // If this is in a dropdown, also highlight the dropdown
