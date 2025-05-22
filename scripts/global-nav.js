@@ -1,4 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
+  // First, remove any existing navigation
+  const existingNav = document.querySelector('.nav.sticky-nav:not(.global-nav-placeholder)');
+  if (existingNav) {
+    existingNav.remove();
+  }
+  
   // Find the navigation placeholder on the page
   const navPlaceholder = document.querySelector('.global-nav-placeholder');
   
