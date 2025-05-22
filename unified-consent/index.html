@@ -15,14 +15,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
   <!-- Osano Unified Consent SDK -->
-  <script src="https://s.uc.osano.com/sdk/latest.min.js" crossorigin="anonymous"></script>
-
+  <script type="text/javascript" src="https://s.uc.osano.com/sdk/latest.min.js" crossorigin="anonymous"></script>
   <script type="text/javascript" crossorigin="anonymous">
     const { UnifiedConsentByOsanoSDK } = window.unifiedConsentJsSdk;
     if (window.navigator.globalPrivacyControl) {
       UnifiedConsentByOsanoSDK.getToken({
         issuer: 'https://uc.api.osano.com/v2/token/create',
-        configId: '8834de69-269c-45ae-a275-0e0b54cfd817',
+        configId: '5cae96df-dda7-4712-9040-df0ff617e5c9',
         customerId: 'AzZcpvRm9bbsqngN',
       }).then(token => {
         UnifiedConsentByOsanoSDK.registerPrivacyProtocols({

@@ -1,2 +1,2 @@
 /*
-  Content-Security-Policy: frame-ancestors 'self' https://jswanosano.github.io https://unifiedconsent.osano.com; 
+  Content-Security-Policy: frame-ancestors 'self' https://jswanosano.github.io https://unifiedconsent.osano.com https://*.osano.com; 
