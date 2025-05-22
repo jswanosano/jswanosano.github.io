@@ -119,6 +119,23 @@ a:hover {
   color: var(--emerald);
 }
 
+/* Add styles for active navigation items */
+.nav-list a.active {
+  font-weight: bold;
+  color: var(--electric-indigo);
+  position: relative;
+}
+
+.nav-list a.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background-color: var(--electric-indigo);
+}
+
 .dropdown {
   position: relative;
   display: inline-block;
@@ -136,6 +153,12 @@ a:hover {
 
 .dropdown-label:hover {
   color: var(--emerald);
+}
+
+/* Add styling for the active dropdown label */
+.dropdown-label.active {
+  font-weight: bold;
+  color: var(--electric-indigo);
 }
 
 .dropdown-menu {

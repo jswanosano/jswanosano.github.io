@@ -13,25 +13,8 @@
     <p class="site-subtitle">Explore Osano's cookie banner implementations—from default recommendations to advanced suppression methods.</p>
   </header>
 
-  <!-- Sticky Navigation -->
-<nav class="nav sticky-nav">
-  <ul class="nav-list">
-    <li><a href="/index.html">Home</a></li>
-    <li class="dropdown">
-      <span class="dropdown-label">Cookie Consent ▾</span>
-      <ul class="dropdown-menu">
-        <li><a href="/cookie-consent/index.html">Module Overview</a></li>
-        <li><a href="/cookie-consent/default.html">Default</a></li>
-        <li><a href="/cookie-consent/osano-js-api-banner-suppression.html">Suppressed via JS API</a></li>
-        <li><a href="/cookie-consent/third-party-banner-suppression.html">Suppressed via Third-Party API</a></li>
-      </ul>
-    </li>
-          <li><a href="/dsar/index.html">DSAR</a></li>
-      <li><a href="/unified-consent/index.html">Unified Consent</a></li>
-      <li><a href="/privacy.html">Privacy</a></li>
-    </ul>
-</nav>
-
+  <!-- Global Navigation -->
+  <div class="global-nav-placeholder"></div>
 
   <!-- Main Content -->
   <main class="module">
@@ -95,6 +78,7 @@
     </div>
   </footer>
 
+  <script src="../../scripts/global-nav.js"></script>
   <script src="../../scripts/cookie-consent/index.js"></script>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
