@@ -11,11 +11,34 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      border-radius: 20px;
       width: 50vw;
-      max-width: 640px;
+      max-width: 500px;
       min-width: 320px;
       min-height: 70vh;
       max-height: 80vh;
+    }
+    
+    .osano-cm-dialog {
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      justify-content: space-between; /* Align content and buttons horizontally */
+    }
+    
+    .osano-cm-button {
+      border-radius: 20px;
+      font-weight: 500;
+      line-height: 1.5; /* Ensure the text is centered vertically */
+      justify-content: center; /* Center the text horizontally */
+    }
+    
+    .osano-cm-content {
+      max-width: 50%;
+      line-height: 1.5;
+      margin-left: 5%
+    }
+    
+    .osano-cm-widget {
+      display: none;
     }
   </style>
   <script src="https://cmp.osano.com/AzZcpvRm9bbsqngN/9a87dd5e-e1f7-4263-8666-6565274cb599/osano.js"></script>
@@ -77,8 +100,10 @@
         <ul>
           <li><a href="https://docs.osano.com" target="_blank" rel="noopener">Implementation Docs</a></li>
           <li><a href="https://developers.osano.com" target="_blank" rel="noopener">Developer Docs</a></li>
-          <li><a href="#" onclick="Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')">Cookie Preferences</a></li>
           <li><a href="/privacy">Privacy</a></li>
+        </ul>
+        <ul>
+          <li><a href="#" onclick="Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')">Cookie Preferences</a></li>
         </ul>
       </div>
     </div>
