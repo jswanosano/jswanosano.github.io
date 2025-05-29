@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cookie Consent (Recommended Installation)</title>
+  <title>Cookie Consent (CSS Customized Installation)</title>
   <link rel="stylesheet" href="../../styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
@@ -11,11 +11,34 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      border-radius: 20px;
       width: 50vw;
-      max-width: 640px;
+      max-width: 500px;
       min-width: 320px;
       min-height: 70vh;
       max-height: 80vh;
+    }
+    
+    .osano-cm-dialog {
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      justify-content: space-between; /* Align content and buttons horizontally */
+    }
+    
+    .osano-cm-button {
+      border-radius: 20px;
+      font-weight: 500;
+      line-height: 1.5; /* Ensure the text is centered vertically */
+      justify-content: center; /* Center the text horizontally */
+    }
+    
+    .osano-cm-content {
+      max-width: 50%;
+      line-height: 1.5;
+      margin-left: 5%
+    }
+    
+    .osano-cm-widget {
+      display: none;
     }
   </style>
   <script src="https://cmp.osano.com/AzZcpvRm9bbsqngN/9a87dd5e-e1f7-4263-8666-6565274cb599/osano.js"></script>
@@ -23,7 +46,7 @@
 <body>
   <!-- Page Header -->
   <header class="site-header alt-header">
-    <h1 class="site-title">Cookie Consent (Recommended Installation)</h1>
+    <h1 class="site-title">Cookie Consent (CSS Customized Installation)</h1>
   </header>
 
   <!-- Global Navigation -->
@@ -34,29 +57,29 @@
     <!-- Hero Section -->
     <section class="hero">
       <h2>Welcome to Our Website</h2>
-      <p>This site demonstrates the recommended implementation of Osano's Cookie Consent banner.</p>
+      <p>This site demonstrates a CSS-customized implementation of Osano's Cookie Consent banner.</p>
     </section>
 
     <!-- Three-Column Features -->
     <section class="features">
       <div class="feature">
-        <h3>Automatic Geo-Targeting</h3>
-        <p>The Osano banner dynamically displays regionally appropriate consent dialogs so you're always compliant, no matter where you meet your users.</p>
+        <h3>Custom Styling</h3>
+        <p>This implementation uses custom CSS to modify the appearance of the cookie consent dialog, buttons, and widget visibility.</p>
       </div>
       <div class="feature">
-        <h3>Built-in Accessibility</h3>
-        <p>Osano always builds with accessibility in mind - another check in the box for your peace of mind.</p>
+        <h3>Enhanced User Experience</h3>
+        <p>With rounded corners, improved spacing, and better text alignment, this implementation offers an enhanced visual appearance.</p>
       </div>
       <div class="feature">
-        <h3>No-Code Integration</h3>
-        <p>Deploy with a single script tag and configure all behavior from the Osano platform.</p>
+        <h3>Hidden Cookie Widget</h3>
+        <p>The floating cookie widget is hidden through CSS, providing a cleaner interface while maintaining all functionality.</p>
       </div>
     </section>
 
     <!-- About Section -->
     <section class="about">
-      <h2>Why This Is the Recommended Installation</h2>
-      <p>The default Osano configuration leverages years of privacy expertise to deliver legally compliant behavior globally. This implementation includes automatic jurisdiction detection, graceful fallback defaults, and fully managed consent logic—ensuring a fast and easy deployment without sacrificing trust or transparency.</p>
+      <h2>Why Use Custom CSS</h2>
+      <p>While Osano's default styling is already compliant and user-friendly, custom CSS allows you to better match your brand's design language and create a more seamless experience for your users. This implementation demonstrates how to customize the consent UI without sacrificing functionality or compliance.</p>
     </section>
   </main>
 
@@ -77,7 +100,6 @@
         <ul>
           <li><a href="https://docs.osano.com" target="_blank" rel="noopener">Implementation Docs</a></li>
           <li><a href="https://developers.osano.com" target="_blank" rel="noopener">Developer Docs</a></li>
-          <li><a href="#" onclick="Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')">Cookie Preferences</a></li>
           <li><a href="/privacy">Privacy</a></li>
         </ul>
       </div>
@@ -86,6 +108,10 @@
     <div class="footer-lower">
       <p>Originally made by Christie Roy, adjusted by Jacob Swan</p>
       <p>© <span id="year"></span> Osano</p>
+    </div>
+    
+    <div class="cookie-preferences-container" style="text-align: center; margin-top: 15px;">
+      <a href="#" onclick="Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')">Cookie Preferences</a>
     </div>
   </footer>
 
