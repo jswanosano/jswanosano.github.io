@@ -201,7 +201,7 @@ a:hover {
    🧭 Page Layout
    ========================= */
 .module {
-  padding: 4rem 2rem;
+  padding: 4rem 2rem 2rem;
   max-width: 960px;
   margin: 0 auto;
   background-color: white;
@@ -348,7 +348,7 @@ iframe {
   color: white;
   padding: 3rem 2rem 1rem;
   font-size: 0.9rem;
-  margin-top: 4rem;
+  margin-top: 2rem;
   text-align: center;
 }
 
