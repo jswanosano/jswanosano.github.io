@@ -1,5 +1,5 @@
 // Function to call the Osano JavaScript API & allow banner suppression
-fetch('https://ipinfo.io/json?token=09a57283894e52')
+fetch('https://ipinfo.io/json?token=f414a7e0ee3749')
   .then(response => response.json())
   .then(data => {
     const stateName = data.region || '';
