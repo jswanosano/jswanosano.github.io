@@ -312,7 +312,7 @@ iframe {
 }
 
 .card-link {
-  display: inline-block;
+  display: inline-flex;
   background-color: var(--dark-storm);
   color: white;
   padding: 0.4rem 1rem;
@@ -321,6 +321,9 @@ iframe {
   font-family: var(--font-heading);
   font-weight: 500;
   transition: background-color 0.2s ease;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
 }
 
 .card-link:hover {
