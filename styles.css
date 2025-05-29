@@ -324,6 +324,16 @@ iframe {
   align-items: center;
   justify-content: center;
   min-height: 36px;
+  text-align: center;
+  width: auto;
+  box-sizing: border-box;
+}
+
+/* Ensure text stays centered on all browsers/platforms */
+.card-link span {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
 }
 
 .card-link:hover {
