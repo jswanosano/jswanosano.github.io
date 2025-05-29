@@ -160,32 +160,6 @@
 
   <script src="scripts/global-nav.js"></script>
   <script src="scripts/include-footer.js"></script>
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-    
-    // Handle accordion behavior
-    var accordions = document.getElementsByClassName("accordion");
-    
-    for (var i = 0; i < accordions.length; i++) {
-      accordions[i].addEventListener("click", function() {
-        // Close all active panels first
-        for (var j = 0; j < accordions.length; j++) {
-          if (this !== accordions[j]) {
-            accordions[j].classList.remove("active");
-            accordions[j].nextElementSibling.style.maxHeight = null;
-          }
-        }
-        
-        // Toggle the clicked panel
-        this.classList.toggle("active");
-        var panel = this.nextElementSibling;
-        if (panel.style.maxHeight) {
-          panel.style.maxHeight = null;
-        } else {
-          panel.style.maxHeight = panel.scrollHeight + "px";
-        }
-      });
-    }
-  </script>
+  <script src="scripts/privacy.js"></script>
 </body>
 </html> 
