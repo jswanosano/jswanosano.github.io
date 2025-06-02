@@ -59,15 +59,26 @@
     
     /* Body background tints based on consent status */
     body.tint-green {
-      background-color: rgba(42, 157, 78, 0.05);
+      background-color: rgba(42, 157, 78, 0.15);
     }
     
     body.tint-red {
-      background-color: rgba(229, 57, 53, 0.05);
+      background-color: rgba(229, 57, 53, 0.15);
     }
     
     body.tint-yellow {
-      background-color: rgba(255, 193, 7, 0.05);
+      background-color: rgba(255, 193, 7, 0.15);
+    }
+    
+    /* Hide bullet points in the hero section */
+    .hero ul {
+      list-style-type: none;
+      padding-left: 0;
+      text-align: center;
+    }
+    
+    .hero li {
+      margin-bottom: 0.5rem;
     }
   </style>
   <script src="https://cmp.osano.com/AzZcpvRm9bbsqngN/9a87dd5e-e1f7-4263-8666-6565274cb599/osano.js"></script>
@@ -118,13 +129,29 @@
     <!-- About Section -->
     <section class="about">
       <h2>How It Works</h2>
-      <p>This page uses several key features of the Osano JavaScript API:</p>
+      <p>This page demonstrates practical implementation of the Osano JavaScript API for responsive content based on user privacy choices. Here's exactly what's happening behind the scenes:</p>
+      
+      <h4>1. Initial Consent Detection</h4>
+      <p>When the page loads, the <code>osano-cm-initialized</code> event listener captures the current consent state using <code>Osano.cm.getConsent()</code> and immediately applies the appropriate styling.</p>
+      
+      <h4>2. Real-time Preference Tracking</h4>
+      <p>The page listens for two critical events:</p>
       <ul>
-        <li><code>Osano.cm.getConsent()</code> - To retrieve the current consent status</li>
-        <li><code>Osano.cm.addEventListener()</code> - To listen for changes in consent preferences</li>
-        <li>Event handlers for <code>osano-cm-consent-changed</code> and <code>osano-cm-initialized</code> events</li>
+        <li><code>osano-cm-consent-changed</code>: Triggered whenever a specific consent category changes state (Accept/Deny)</li>
+        <li><code>osano-cm-consent-saved</code>: Triggered when the user finalizes their consent choices</li>
       </ul>
-      <p>When consent preferences change, the page updates dynamically to reflect the new status, demonstrating how websites can adapt their functionality based on user privacy choices.</p>
+      
+      <h4>3. Dynamic Content Adjustment</h4>
+      <p>The <code>updatePageBasedOnConsent()</code> function processes the consent object, which looks like:</p>
+      <pre><code>{
+  ANALYTICS: "ACCEPT"|"DENY",
+  MARKETING: "ACCEPT"|"DENY", 
+  PERSONALIZATION: "ACCEPT"|"DENY",
+  ESSENTIAL: "ACCEPT",
+  OPT-OUT: "ACCEPT"|"DENY", 
+  STORAGE: "ACCEPT"|"DENY"
+}</code></pre>
+      <p>Based on the status of non-essential categories, the page updates its appearance and text content in real-time.</p>
     </section>
     
     <!-- Cookie Preferences Section -->
