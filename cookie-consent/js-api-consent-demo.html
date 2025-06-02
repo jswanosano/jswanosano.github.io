@@ -121,6 +121,7 @@
         <li><strong>Yellow tint:</strong> Mixed acceptance of non-essential categories</li>
       </ul>
       <p>Try changing your cookie preferences using the button below to see how the page responds in real-time!</p>
+      <button onclick="Osano.cm.showDrawer()" class="demo-button">Open Cookie Preferences</button>
     </section>
 
     <!-- Consent Status Section -->
@@ -177,8 +178,8 @@
     </section>
     
     <!-- Cookie Preferences Section -->
-    <div style="text-align: center; margin: 2rem auto 0 auto; padding-top: 1.5rem; border-top: 1px solid rgba(43, 24, 194, 0.15);">
-      <a href="#" onclick="Osano.cm.showDrawer()" style="color: var(--electric-indigo); text-decoration: underline; font-weight: 500;">Update Cookie Preferences</a>
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="javascript:void(0)" onclick="event.preventDefault(); Osano.cm.showDrawer()" style="color: var(--electric-indigo); text-decoration: underline; font-weight: 500;">Update Cookie Preferences</a>
     </div>
   </main>
 
