@@ -507,86 +507,108 @@ iframe {
    ========================= */
 @media screen and (max-width: 768px) {
   .site-header {
-    padding: 1.5rem 1rem 1rem;
+    padding: 1.2rem 1rem 0.8rem;
   }
   
   .site-title {
-    font-size: 3.6rem;
-    margin-bottom: 0.5rem;
+    font-size: 2.5rem;
+    margin-bottom: 0.3rem;
   }
   
   .site-subtitle {
-    font-size: 1.8rem;
-    line-height: 1.4;
+    font-size: 1rem;
+    line-height: 1.3;
   }
   
   .nav {
-    padding: 0.8rem 1rem;
-  }
-  
-  .nav-list {
-    gap: 1.4rem;
-  }
-  
-  .nav-list a, .dropdown-label {
-    font-size: 1.9rem;
-    display: flex;
-    align-items: center;
     padding: 0.5rem;
   }
   
+  .nav-list {
+    gap: 0.8rem;
+  }
+  
+  .nav-list a, .dropdown-label {
+    font-size: 1rem;
+    padding: 0.6rem 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+  }
+  
+  .nav-list a:hover, .dropdown-label:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+  }
+  
   .dropdown-menu {
-    min-width: 300px;
-    padding: 1.5rem;
+    min-width: 200px;
+    padding: 0.5rem;
+    border-radius: 8px;
+    margin-top: 0.5rem;
   }
   
   .dropdown-menu a {
-    font-size: 1.8rem;
+    font-size: 0.95rem;
+    padding: 0.7rem 1rem;
+    display: block;
+    border-radius: 4px;
+  }
+  
+  .dropdown-menu a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    text-decoration: none;
   }
   
   .module {
-    padding: 2rem 1.5rem 1.5rem;
+    padding: 1.5rem 1rem 1rem;
   }
 }
 
 @media screen and (max-width: 480px) {
   .site-header {
-    padding: 1.6rem 1rem 1.2rem;
+    padding: 0.8rem 0.6rem 0.6rem;
   }
   
   .site-title {
-    font-size: 3.3rem;
-    line-height: 1.3;
+    font-size: 1.8rem;
+    line-height: 1.2;
   }
   
   .site-subtitle {
-    font-size: 1.6rem;
+    font-size: 0.8rem;
     line-height: 1.3;
-    margin-top: 0.2rem;
+    margin-top: 0.1rem;
   }
   
   .nav {
-    padding: 0.7rem 0.8rem;
+    padding: 0.4rem;
   }
   
   .nav-list {
-    gap: 1rem;
+    gap: 0.4rem;
   }
   
   .nav-list a, .dropdown-label {
-    font-size: 1.9rem;
-    padding: 0.6rem;
-    display: flex;
-    align-items: center;
+    font-size: 0.9rem;
+    padding: 0.5rem 0.6rem;
   }
   
   .dropdown-menu {
-    min-width: 300px;
-    padding: 1.2rem;
+    min-width: 180px;
+    padding: 0.4rem;
+    right: 0;
+    left: auto;
   }
   
   .dropdown-menu li {
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.2rem;
+  }
+  
+  .dropdown-menu a {
+    font-size: 0.85rem;
+    padding: 0.6rem 0.8rem;
   }
 }
 
@@ -601,12 +623,12 @@ iframe {
 /* Make sure alt-header responds to media queries as well */
 @media screen and (max-width: 768px) {
   .alt-header {
-    padding: 1.5rem 1rem 1rem;
+    padding: 1.2rem 1rem 0.8rem;
   }
 }
 
 @media screen and (max-width: 480px) {
   .alt-header {
-    padding: 1.6rem 1rem 1.2rem;
+    padding: 0.8rem 0.6rem 0.6rem;
   }
 }
