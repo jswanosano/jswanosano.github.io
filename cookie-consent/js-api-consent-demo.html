@@ -59,25 +59,28 @@
     
     /* Body background tints based on consent status */
     body.tint-green {
-      background-color: rgba(42, 157, 78, 0.15);
+      background-color: rgba(42, 157, 78, 0.3);
     }
     
     body.tint-red {
-      background-color: rgba(229, 57, 53, 0.15);
+      background-color: rgba(229, 57, 53, 0.3);
     }
     
     body.tint-yellow {
-      background-color: rgba(255, 193, 7, 0.15);
+      background-color: rgba(255, 193, 7, 0.3);
     }
     
-    /* Hide bullet points in the hero section */
-    .hero ul {
+    /* Hide bullet points in the hero section and about section */
+    .hero ul, .about ul {
       list-style-type: none;
       padding-left: 0;
+    }
+    
+    .hero ul {
       text-align: center;
     }
     
-    .hero li {
+    .hero li, .about li {
       margin-bottom: 0.5rem;
     }
   </style>
