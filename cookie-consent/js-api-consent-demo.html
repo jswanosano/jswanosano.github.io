@@ -41,7 +41,7 @@
     }
     
     .status-denied {
-      color: #e53935;
+      color: #850200;
       font-weight: 600;
     }
     
@@ -63,7 +63,7 @@
     }
     
     body.tint-red {
-      background-color: rgba(229, 57, 53, 0.7);
+      background-color: rgba(133, 2, 0, 0.7);
     }
     
     body.tint-yellow {
@@ -252,14 +252,14 @@
       updatePageBasedOnConsent(consent);
     });
     
-    // Update when consent changes
-    Osano.cm.addEventListener('osano-cm-consent-changed', function(changes) {
-      console.log('Consent changed:', changes);
-      const currentConsent = Osano.cm.getConsent();
-      updatePageBasedOnConsent(currentConsent);
-    });
+    // We're no longer updating when categories are toggled, only when consent is saved
+    // Osano.cm.addEventListener('osano-cm-consent-changed', function(changes) {
+    //   console.log('Consent changed:', changes);
+    //   const currentConsent = Osano.cm.getConsent();
+    //   updatePageBasedOnConsent(currentConsent);
+    // });
     
-    // Also listen for when consent is saved
+    // Only update when consent is saved
     Osano.cm.addEventListener('osano-cm-consent-saved', function(consent) {
       console.log('Consent saved:', consent);
       updatePageBasedOnConsent(consent);
