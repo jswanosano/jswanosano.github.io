@@ -83,6 +83,19 @@
     .hero li, .about li {
       margin-bottom: 0.5rem;
     }
+    
+    /* Puppy GIF container */
+    .puppy-container {
+      display: none; /* Hidden by default */
+      text-align: center;
+      margin: 3rem auto;
+    }
+    
+    .puppy-container img {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
   </style>
   <script src="https://cmp.osano.com/AzZcpvRm9bbsqngN/9a87dd5e-e1f7-4263-8666-6565274cb599/osano.js"></script>
 </head>
@@ -128,6 +141,12 @@
         <span id="personalization-status">Loading...</span>
       </div>
     </section>
+
+    <!-- Puppy GIF Section - Only visible when all categories accepted -->
+    <div class="puppy-container" id="puppy-container">
+      <h3>Thanks for accepting all categories! Here's a happy puppy!</h3>
+      <img src="https://media1.tenor.com/m/_4xCiEhhoZsAAAAC/dog-smile.gif" alt="Happy smiling dog" width="400">
+    </div>
 
     <!-- About Section -->
     <section class="about">
@@ -196,10 +215,14 @@
       // Update consent summary
       const consentSummary = document.getElementById('consent-summary');
       const consentStatus = document.getElementById('consent-status');
+      const puppyContainer = document.getElementById('puppy-container');
       
       // Reset all body classes
       document.body.classList.remove('tint-green', 'tint-red', 'tint-yellow');
       consentStatus.classList.remove('all-accepted', 'all-denied', 'mixed-consent');
+      
+      // Hide puppy by default
+      puppyContainer.style.display = 'none';
       
       // Apply appropriate styling based on consent status
       if (acceptedCount === nonEssentialCategories.length) {
@@ -207,6 +230,9 @@
         document.body.classList.add('tint-green');
         consentStatus.classList.add('all-accepted');
         consentSummary.textContent = 'You have accepted all non-essential cookie categories. The page has a green tint.';
+        
+        // Show the puppy!
+        puppyContainer.style.display = 'block';
       } else if (acceptedCount === 0) {
         // All categories denied
         document.body.classList.add('tint-red');
