@@ -320,7 +320,7 @@
             
             <div class="guide-section">
               <h4>Step 2: Create Your Base CSS Styles</h4>
-              <p>Add these CSS styles to your stylesheet to create visual indicators for consent status:</p>
+              <p>Add these CSS styles to your stylesheet to create visual indicators for consent status. These styles provide a foundation for showing/hiding content and creating visual feedback for users:</p>
               <pre><code>/* Consent status indicators */
 .consent-status {
   margin: 2rem 0;
@@ -340,28 +340,30 @@
   font-weight: 600;
 }
 
-/* Background tints based on consent status */
-body.tint-green {
-  background-color: rgba(42, 157, 78, 0.3);
-}
-
-body.tint-red {
-  background-color: rgba(211, 47, 47, 0.3);
-}
-
-body.tint-yellow {
-  background-color: rgba(255, 193, 7, 0.3);
-}
-
 /* Conditional content container */
 .conditional-content {
   display: none; /* Hidden by default */
+}
+
+/* Style for consent-required messages */
+.consent-required-message {
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.consent-required-message a {
+  color: var(--electric-indigo);
+  text-decoration: underline;
+  font-weight: 500;
 }</code></pre>
             </div>
             
             <div class="guide-section">
               <h4>Step 3: Add HTML Structure</h4>
-              <p>Set up your HTML structure to display consent status and conditional content:</p>
+              <p>Set up your HTML structure to display consent status and conditional content. This example shows how to create both a consent status display and conditional content sections that require specific consent categories:</p>
               <pre><code>&lt;!-- Consent Status Display --&gt;
 &lt;div class="consent-status" id="consent-status"&gt;
   &lt;h3&gt;Your Current Consent Status&lt;/h3&gt;
@@ -381,10 +383,18 @@ body.tint-yellow {
   &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;!-- Conditional Content Example --&gt;
-&lt;div class="conditional-content" id="premium-content"&gt;
-  &lt;h3&gt;Premium Content&lt;/h3&gt;
-  &lt;p&gt;This content only appears when specific consent categories are accepted.&lt;/p&gt;
+&lt;!-- Example of conditional content with consent message --&gt;
+&lt;div class="conditional-content" id="personalized-video"&gt;
+  &lt;h3&gt;Personalized Video Content&lt;/h3&gt;
+  &lt;video controls&gt;
+    &lt;source src="video.mp4" type="video/mp4"&gt;
+    Your browser does not support the video tag.
+  &lt;/video&gt;
+&lt;/div&gt;
+
+&lt;!-- Consent required message (shown when content is hidden) --&gt;
+&lt;div class="consent-required-message" id="personalized-video-message"&gt;
+  &lt;p&gt;Enable Personalization in your &lt;a href="javascript:void(0)" onclick="Osano.cm.showDrawer()"&gt;Cookie Preferences&lt;/a&gt; to view this video content.&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;!-- Button to Open Cookie Preferences --&gt;
@@ -393,7 +403,7 @@ body.tint-yellow {
             
             <div class="guide-section">
               <h4>Step 4: Implement the JavaScript Logic</h4>
-              <p>Add this JavaScript to your page to handle consent changes:</p>
+              <p>Add this JavaScript to your page to handle consent changes. This code demonstrates how to show/hide content and display appropriate messages based on user consent:</p>
               <pre><code>// Function to update the page based on consent status
 function updatePageBasedOnConsent(consent) {
   if (!consent) return;
@@ -407,58 +417,31 @@ function updatePageBasedOnConsent(consent) {
   };
   
   // Update individual category status displays
-  let acceptedCount = 0;
   nonEssentialCategories.forEach(category => {
     const status = consent[category];
     if (statusElements[category]) {
       statusElements[category].textContent = status;
       statusElements[category].className = status === 'ACCEPT' ? 'status-accepted' : 'status-denied';
-      if (status === 'ACCEPT') acceptedCount++;
     }
   });
   
-  // Get references to elements
-  const consentSummary = document.getElementById('consent-summary');
-  const consentStatus = document.getElementById('consent-status');
-  const premiumContent = document.getElementById('premium-content');
+  // Handle conditional content visibility
+  const personalizedVideo = document.getElementById('personalized-video');
+  const personalizedVideoMessage = document.getElementById('personalized-video-message');
   
-  // Reset all body classes
-  document.body.classList.remove('tint-green', 'tint-red', 'tint-yellow');
-  
-  // Apply appropriate styling based on consent status
-  if (acceptedCount === nonEssentialCategories.length) {
-    // All categories accepted
-    document.body.classList.add('tint-green');
-    consentSummary.textContent = 'You have accepted all non-essential cookie categories.';
-    
-    // Show premium content when all categories are accepted
-    if (premiumContent) premiumContent.style.display = 'block';
-  } else if (acceptedCount === 0) {
-    // All categories denied
-    document.body.classList.add('tint-red');
-    consentSummary.textContent = 'You have denied all non-essential cookie categories.';
-    
-    // Hide premium content
-    if (premiumContent) premiumContent.style.display = 'none';
-  } else {
-    // Mixed acceptance
-    document.body.classList.add('tint-yellow');
-    consentSummary.textContent = `You have accepted ${acceptedCount} out of ${nonEssentialCategories.length} non-essential cookie categories.`;
-    
-    // Custom logic for specific consent combinations
-    const hasAnalytics = consent['ANALYTICS'] === 'ACCEPT';
-    const hasMarketing = consent['MARKETING'] === 'ACCEPT';
-    
-    // Example: Show premium content only if analytics is accepted
-    if (premiumContent) {
-      premiumContent.style.display = hasAnalytics ? 'block' : 'none';
+  if (personalizedVideo && personalizedVideoMessage) {
+    if (consent.PERSONALIZATION === 'ACCEPT') {
+      personalizedVideo.style.display = 'block';
+      personalizedVideoMessage.style.display = 'none';
+    } else {
+      personalizedVideo.style.display = 'none';
+      personalizedVideoMessage.style.display = 'block';
     }
   }
 }
 
 // Wait for Osano to initialize
 document.addEventListener('DOMContentLoaded', function() {
-  // Check if Osano exists (in case script fails to load)
   if (typeof Osano !== 'undefined' && Osano.cm) {
     // Initialize when Osano is ready
     Osano.cm.addEventListener('osano-cm-initialized', function(consent) {
@@ -471,12 +454,6 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log('Consent saved:', consent);
       updatePageBasedOnConsent(consent);
     });
-    
-    // Optional: Update in real-time as user toggles consent
-    // Osano.cm.addEventListener('osano-cm-consent-changed', function(changes) {
-    //   const currentConsent = Osano.cm.getConsent();
-    //   updatePageBasedOnConsent(currentConsent);
-    // });
   } else {
     console.error('Osano script not loaded properly');
   }
@@ -485,32 +462,9 @@ document.addEventListener('DOMContentLoaded', function() {
             
             <div class="guide-section">
               <h4>Step 5: Advanced Customization</h4>
-              <p>Here are some additional customization options:</p>
+              <p>Here are some additional customization options for different use cases:</p>
               
-              <h5>A. Load Different Resources Based on Consent</h5>
-              <pre><code>// Example: Conditionally load Google Analytics
-function loadAnalytics(consent) {
-  if (consent.ANALYTICS === 'ACCEPT') {
-    // Create and append Google Analytics script
-    const gaScript = document.createElement('script');
-    gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID';
-    gaScript.async = true;
-    document.head.appendChild(gaScript);
-    
-    // Initialize Google Analytics
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'GA_MEASUREMENT_ID');
-  }
-}
-
-// Call this function when consent changes
-Osano.cm.addEventListener('osano-cm-consent-saved', function(consent) {
-  loadAnalytics(consent);
-});</code></pre>
-              
-              <h5>B. Add Personalized UI Elements</h5>
+              <h5>A. Add Personalized UI Elements</h5>
               <pre><code>// Example: Show different hero images based on consent
 function updateHeroImage(consent) {
   const hero = document.querySelector('.hero');
@@ -525,18 +479,22 @@ function updateHeroImage(consent) {
   }
 }</code></pre>
               
-              <h5>C. Dynamic Feature Activation</h5>
+              <h5>B. Dynamic Feature Activation</h5>
               <pre><code>// Example: Enable chat widget based on marketing consent
 function toggleChatWidget(consent) {
   const chatWidget = document.getElementById('chat-widget');
-  if (!chatWidget) return;
+  const chatMessage = document.getElementById('chat-message');
+  
+  if (!chatWidget || !chatMessage) return;
   
   if (consent.MARKETING === 'ACCEPT') {
-    chatWidget.dataset.enabled = 'true';
+    chatWidget.style.display = 'block';
+    chatMessage.style.display = 'none';
     initializeChat(); // Your function to start the chat widget
   } else {
-    chatWidget.dataset.enabled = 'false';
-    disableChat(); // Your function to disable the chat widget
+    chatWidget.style.display = 'none';
+    chatMessage.style.display = 'block';
+    chatMessage.innerHTML = 'Enable Marketing cookies in your &lt;a href="javascript:void(0)" onclick="Osano.cm.showDrawer()"&gt;Cookie Preferences&lt;/a&gt; to access live chat support.';
   }
 }</code></pre>
             </div>
@@ -544,11 +502,14 @@ function toggleChatWidget(consent) {
             <div class="guide-section">
               <h4>Step 6: Best Practices</h4>
               <ul>
-                <li><strong>Performance:</strong> Avoid making expensive DOM operations on every consent change</li>
-                <li><strong>User Experience:</strong> Clearly communicate why certain features require consent</li>
-                <li><strong>Graceful Degradation:</strong> Ensure your site works well even when all consent is denied</li>
-                <li><strong>Security:</strong> Never store PII (Personally Identifiable Information) without proper consent</li>
-                <li><strong>Testing:</strong> Test your implementation across different browsers and devices</li>
+                <li><strong>Clear Communication:</strong> Always explain why certain content or features require specific consent categories. Use clear, user-friendly language in consent-required messages.</li>
+                <li><strong>Graceful Degradation:</strong> Ensure your site remains functional and provides value even when users deny non-essential cookies. Never hide critical content or features behind consent walls.</li>
+                <li><strong>Performance Optimization:</strong> Avoid making expensive DOM operations on every consent change. Batch updates when possible and use efficient selectors.</li>
+                <li><strong>Accessibility:</strong> Ensure consent-required messages and conditional content are accessible to screen readers. Use proper ARIA attributes and maintain keyboard navigation.</li>
+                <li><strong>User Experience:</strong> Make it easy for users to update their preferences. Include clear calls-to-action and maintain consistent styling for preference-related UI elements.</li>
+                <li><strong>Testing:</strong> Test your implementation across different browsers and devices. Verify that content visibility changes correctly when consent is updated.</li>
+                <li><strong>Security:</strong> Never store or process personal data without proper consent. Implement proper data handling practices and respect user privacy choices.</li>
+                <li><strong>Documentation:</strong> Maintain clear documentation of which features require which consent categories. This helps with maintenance and ensures compliance.</li>
               </ul>
             </div>
           </div>
