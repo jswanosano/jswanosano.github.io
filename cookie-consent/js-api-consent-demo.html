@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cookie Consent (JavaScript API Demo)</title>
+  <link rel="stylesheet" href="../../styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      transition: background-color 0.5s ease;
+    }
+    
+    .consent-status {
+      margin: 2rem 0;
+      padding: 1.5rem;
+      border-radius: 8px;
+      background-color: #f5f5f5;
+      transition: background-color 0.5s ease;
+    }
+    
+    .consent-status h3 {
+      margin-top: 0;
+    }
+    
+    .consent-category {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .consent-category:last-child {
+      border-bottom: none;
+    }
+    
+    .status-accepted {
+      color: #2a9d4e;
+      font-weight: 600;
+    }
+    
+    .status-denied {
+      color: #850200;
+      font-weight: 600;
+    }
+    
+    .all-accepted {
+      background-color: rgba(42, 157, 78, 0.1);
+    }
+    
+    .all-denied {
+      background-color: rgba(229, 57, 53, 0.1);
+    }
+    
+    .mixed-consent {
+      background-color: rgba(255, 193, 7, 0.1);
+    }
+    
+    /* Body background tints based on consent status */
+    body.tint-green {
+      background-color: rgba(42, 157, 78, 0.3);
+    }
+    
+    body.tint-red {
+      background-color: rgba(133, 2, 0, 0.7);
+    }
+    
+    body.tint-yellow {
+      background-color: rgba(255, 193, 7, 0.3);
+    }
+    
+    /* Hide bullet points in the hero section and about section */
+    .hero ul, .about ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    
+    .hero ul {
+      text-align: center;
+    }
+    
+    .hero li, .about li {
+      margin-bottom: 0.5rem;
+    }
+    
+    /* Puppy GIF container */
+    .puppy-container {
+      display: none; /* Hidden by default */
+      text-align: center;
+      margin: 3rem auto;
+    }
+    
+    .puppy-container img {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Implementation Guide Accordion Styles */
+    .implementation-guide {
+      margin: 3rem 0;
+    }
+    
+    .code-accordion {
+      margin: 1.5rem 0;
+      border: 1px solid rgba(43, 24, 194, 0.2);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .accordion-toggle {
+      width: 100%;
+      background: linear-gradient(135deg, rgba(43, 24, 194, 0.05), rgba(122, 63, 241, 0.1));
+      border: none;
+      padding: 1rem;
+      text-align: left;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--electric-indigo);
+      cursor: pointer;
+      transition: background-color 0.3s;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .accordion-toggle:after {
+      content: '+';
+      font-size: 1.5rem;
+      font-weight: 300;
+    }
+    
+    .accordion-toggle.active:after {
+      content: '−';
+    }
+    
+    .accordion-toggle:hover {
+      background-color: rgba(43, 24, 194, 0.1);
+    }
+    
+    .accordion-content {
+      display: none;
+      padding: 1rem;
+      background-color: #fff;
+      overflow: auto;
+      max-height: 800px;
+    }
+    
+    .accordion-content.active {
+      display: block;
+    }
+    
+    .guide-container {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    
+    .guide-section {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .guide-section:last-child {
+      border-bottom: none;
+    }
+    
+    .guide-section h4 {
+      margin-bottom: 1rem;
+      color: var(--cobalt);
+    }
+    
+    .guide-section h5 {
+      margin: 1.5rem 0 0.5rem 0;
+      color: var(--gray-blue);
+    }
+    
+    .guide-section pre {
+      background-color: #f8f8f8;
+      border-radius: 4px;
+      padding: 1rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .guide-section code {
+      font-family: 'Monaco', 'Consolas', monospace;
+      font-size: 0.9rem;
+    }
+    
+    .guide-section ul {
+      padding-left: 1.5rem;
+      list-style-type: disc;
+    }
+    
+    .guide-section ul li {
+      margin-bottom: 0.5rem;
+    }
+    
+    /* Demo button styles */
+    .demo-button {
+      background-color: var(--electric-indigo);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 4px;
+      font-family: var(--font-heading);
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    
+    .demo-button:hover {
+      background-color: var(--dark-storm);
+    }
+  </style>
+  <script src="https://cmp.osano.com/AzZcpvRm9bbsqngN/9a87dd5e-e1f7-4263-8666-6565274cb599/osano.js"></script>
+</head>
+<body>
+  <!-- Page Header -->
+  <header class="site-header alt-header">
+    <h1 class="site-title">Cookie Consent (JavaScript API Demo)</h1>
+  </header>
+
+  <!-- Global Navigation -->
+  <div class="global-nav-placeholder"></div>
+
+  <!-- Main Content -->
+  <main class="module">
+    <!-- Hero Section -->
+    <section class="hero">
+      <h2>Osano JavaScript API Demo</h2>
+      <p>This page demonstrates how to use the Osano JavaScript API to dynamically update page content based on user consent preferences.</p>
+      <p>The page background will change color based on your consent choices:</p>
+      <ul>
+        <li><strong>Green tint:</strong> All non-essential categories accepted</li>
+        <li><strong>Red tint:</strong> All non-essential categories denied</li>
+        <li><strong>Yellow tint:</strong> Mixed acceptance of non-essential categories</li>
+      </ul>
+      <p>Try changing your cookie preferences using the link below to see how the page responds in real-time!</p>
+     <!-- Cookie Preferences Section -->
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="javascript:void(0)" onclick="event.preventDefault(); Osano.cm.showDrawer()" style="color: var(--electric-indigo); text-decoration: underline; font-weight: 500;">Update Cookie Preferences</a>
+    </div>
+    </section>
+
+    <!-- Consent Status Section -->
+    <section class="consent-status" id="consent-status">
+      <h3>Your Current Consent Status</h3>
+      <p id="consent-summary">Checking your consent preferences...</p>
+      
+      <div class="consent-category">
+        <span>Analytics:</span>
+        <span id="analytics-status">Loading...</span>
+      </div>
+      <div class="consent-category">
+        <span>Marketing:</span>
+        <span id="marketing-status">Loading...</span>
+      </div>
+      <div class="consent-category">
+        <span>Personalization:</span>
+        <span id="personalization-status">Loading...</span>
+      </div>
+    </section>
+
+    <!-- Puppy GIF Section - Only visible when all categories accepted -->
+    <div class="puppy-container" id="puppy-container">
+      <h3>Thanks for accepting all categories! Here's a happy puppy!</h3>
+      <img src="https://media1.tenor.com/m/_4xCiEhhoZsAAAAC/dog-smile.gif" alt="Happy smiling dog" width="400">
+    </div>
+
+    <!-- About Section -->
+    <section class="about">
+      <h2>How It Works</h2>
+      <p>This page demonstrates practical implementation of the Osano JavaScript API for responsive content based on user privacy choices. Here's exactly what's happening behind the scenes:</p>
+      
+      <h4>1. Initial Consent Detection</h4>
+      <p>When the page loads, the <code>osano-cm-initialized</code> event listener captures the current consent state using <code>Osano.cm.getConsent()</code> and immediately applies the appropriate styling.</p>
+      
+      <h4>2. Real-time Preference Tracking</h4>
+      <p>The page listens for two critical events:</p>
+      <ul>
+        <li><code>osano-cm-consent-changed</code>: Triggered whenever a specific consent category changes state (Accept/Deny)</li>
+        <li><code>osano-cm-consent-saved</code>: Triggered when the user finalizes their consent choices</li>
+      </ul>
+      
+      <h4>3. Dynamic Content Adjustment</h4>
+      <p>The <code>updatePageBasedOnConsent()</code> function processes the consent object, which looks like:</p>
+      <pre><code>{
+  ANALYTICS: "ACCEPT"|"DENY",
+  MARKETING: "ACCEPT"|"DENY", 
+  PERSONALIZATION: "ACCEPT"|"DENY",
+  ESSENTIAL: "ACCEPT",
+  OPT-OUT: "ACCEPT"|"DENY", 
+  STORAGE: "ACCEPT"|"DENY"
+}</code></pre>
+      <p>Based on the status of non-essential categories, the page updates its appearance and text content in real-time.</p>
+    </section>
+
+    <!-- Implementation Guide Section with Dropdown -->
+    <section class="implementation-guide">
+      <h2>Implementation Guide</h2>
+      <p>Want to implement similar consent-based dynamic content on your website? Expand the section below for a complete guide:</p>
+      
+      <div class="code-accordion">
+        <button class="accordion-toggle">Click to Show Complete Implementation Guide</button>
+        <div class="accordion-content">
+          <div class="guide-container">
+            <h3>Step-by-Step Implementation Guide</h3>
+            
+            <div class="guide-section">
+              <h4>Step 1: Add Osano to Your Website</h4>
+              <p>First, add the Osano cookie consent script to your website:</p>
+              <pre><code>&lt;script src="https://cmp.osano.com/[YOUR_ACCOUNT_ID]/[YOUR_CUSTOMER_ID]/osano.js"&gt;&lt;/script&gt;</code></pre>
+              <p><em>Note: Replace placeholders with your unique Osano IDs.</em></p>
+            </div>
+            
+            <div class="guide-section">
+              <h4>Step 2: Create Your Base CSS Styles</h4>
+              <p>Add these CSS styles to your stylesheet to create visual indicators for consent status. These styles provide a foundation for showing/hiding content and creating visual feedback for users:</p>
+              <pre><code>/* Consent status indicators */
+.consent-status {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  transition: background-color 0.5s ease;
+}
+
+.status-accepted {
+  color: #2a9d4e;
+  font-weight: 600;
+}
+
+.status-denied {
+  color: #d32f2f;
+  font-weight: 600;
+}
+
+/* Conditional content container */
+.conditional-content {
+  display: none; /* Hidden by default */
+}
+
+/* Style for consent-required messages */
+.consent-required-message {
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.consent-required-message a {
+  color: var(--electric-indigo);
+  text-decoration: underline;
+  font-weight: 500;
+}</code></pre>
+            </div>
+            
+            <div class="guide-section">
+              <h4>Step 3: Add HTML Structure</h4>
+              <p>Set up your HTML structure to display consent status and conditional content. This example shows how to create both a consent status display and conditional content sections that require specific consent categories:</p>
+              <pre><code>&lt;!-- Consent Status Display --&gt;
+&lt;div class="consent-status" id="consent-status"&gt;
+  &lt;h3&gt;Your Current Consent Status&lt;/h3&gt;
+  &lt;p id="consent-summary"&gt;Checking your consent preferences...&lt;/p&gt;
+  
+  &lt;div class="consent-category"&gt;
+    &lt;span&gt;Analytics:&lt;/span&gt;
+    &lt;span id="analytics-status"&gt;Loading...&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="consent-category"&gt;
+    &lt;span&gt;Marketing:&lt;/span&gt;
+    &lt;span id="marketing-status"&gt;Loading...&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="consent-category"&gt;
+    &lt;span&gt;Personalization:&lt;/span&gt;
+    &lt;span id="personalization-status"&gt;Loading...&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Example of conditional content with consent message --&gt;
+&lt;div class="conditional-content" id="personalized-video"&gt;
+  &lt;h3&gt;Personalized Video Content&lt;/h3&gt;
+  &lt;video controls&gt;
+    &lt;source src="video.mp4" type="video/mp4"&gt;
+    Your browser does not support the video tag.
+  &lt;/video&gt;
+&lt;/div&gt;
+
+&lt;!-- Consent required message (shown when content is hidden) --&gt;
+&lt;div class="consent-required-message" id="personalized-video-message"&gt;
+  &lt;p&gt;Enable Personalization in your &lt;a href="javascript:void(0)" onclick="Osano.cm.showDrawer()"&gt;Cookie Preferences&lt;/a&gt; to view this video content.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- Button to Open Cookie Preferences --&gt;
+&lt;button onclick="Osano.cm.showDrawer()" class="preferences-button"&gt;Open Cookie Preferences&lt;/button&gt;</code></pre>
+            </div>
+            
+            <div class="guide-section">
+              <h4>Step 4: Implement the JavaScript Logic</h4>
+              <p>Add this JavaScript to your page to handle consent changes. This code demonstrates how to show/hide content and display appropriate messages based on user consent:</p>
+              <pre><code>// Function to update the page based on consent status
+function updatePageBasedOnConsent(consent) {
+  if (!consent) return;
+  
+  // Define which categories you want to track
+  const nonEssentialCategories = ['ANALYTICS', 'MARKETING', 'PERSONALIZATION'];
+  const statusElements = {
+    'ANALYTICS': document.getElementById('analytics-status'),
+    'MARKETING': document.getElementById('marketing-status'),
+    'PERSONALIZATION': document.getElementById('personalization-status')
+  };
+  
+  // Update individual category status displays
+  nonEssentialCategories.forEach(category => {
+    const status = consent[category];
+    if (statusElements[category]) {
+      statusElements[category].textContent = status;
+      statusElements[category].className = status === 'ACCEPT' ? 'status-accepted' : 'status-denied';
+    }
+  });
+  
+  // Handle conditional content visibility
+  const personalizedVideo = document.getElementById('personalized-video');
+  const personalizedVideoMessage = document.getElementById('personalized-video-message');
+  
+  if (personalizedVideo && personalizedVideoMessage) {
+    if (consent.PERSONALIZATION === 'ACCEPT') {
+      personalizedVideo.style.display = 'block';
+      personalizedVideoMessage.style.display = 'none';
+    } else {
+      personalizedVideo.style.display = 'none';
+      personalizedVideoMessage.style.display = 'block';
+    }
+  }
+}
+
+// Wait for Osano to initialize
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof Osano !== 'undefined' && Osano.cm) {
+    // Initialize when Osano is ready
+    Osano.cm.addEventListener('osano-cm-initialized', function(consent) {
+      console.log('Osano initialized with consent:', consent);
+      updatePageBasedOnConsent(consent);
+    });
+    
+    // Update when consent is saved
+    Osano.cm.addEventListener('osano-cm-consent-saved', function(consent) {
+      console.log('Consent saved:', consent);
+      updatePageBasedOnConsent(consent);
+    });
+  } else {
+    console.error('Osano script not loaded properly');
+  }
+});</code></pre>
+            </div>
+            
+            <div class="guide-section">
+              <h4>Step 5: Advanced Customization</h4>
+              <p>Here are some additional customization options for different use cases:</p>
+              
+              <h5>A. Add Personalized UI Elements</h5>
+              <pre><code>// Example: Show different hero images based on consent
+function updateHeroImage(consent) {
+  const hero = document.querySelector('.hero');
+  if (!hero) return;
+  
+  if (consent.PERSONALIZATION === 'ACCEPT') {
+    // Load personalized hero image
+    hero.style.backgroundImage = 'url("personalized-hero.jpg")';
+  } else {
+    // Load generic hero image
+    hero.style.backgroundImage = 'url("default-hero.jpg")';
+  }
+}</code></pre>
+              
+              <h5>B. Dynamic Feature Activation</h5>
+              <pre><code>// Example: Enable chat widget based on marketing consent
+function toggleChatWidget(consent) {
+  const chatWidget = document.getElementById('chat-widget');
+  const chatMessage = document.getElementById('chat-message');
+  
+  if (!chatWidget || !chatMessage) return;
+  
+  if (consent.MARKETING === 'ACCEPT') {
+    chatWidget.style.display = 'block';
+    chatMessage.style.display = 'none';
+    initializeChat(); // Your function to start the chat widget
+  } else {
+    chatWidget.style.display = 'none';
+    chatMessage.style.display = 'block';
+    chatMessage.innerHTML = 'Enable Marketing cookies in your &lt;a href="javascript:void(0)" onclick="Osano.cm.showDrawer()"&gt;Cookie Preferences&lt;/a&gt; to access live chat support.';
+  }
+}</code></pre>
+            </div>
+            
+            <div class="guide-section">
+              <h4>Step 6: Best Practices</h4>
+              <ul>
+                <li><strong>Clear Communication:</strong> Always explain why certain content or features require specific consent categories. Use clear, user-friendly language in consent-required messages.</li>
+                <li><strong>Graceful Degradation:</strong> Ensure your site remains functional and provides value even when users deny non-essential cookies. Never hide critical content or features behind consent walls.</li>
+                <li><strong>Performance Optimization:</strong> Avoid making expensive DOM operations on every consent change. Batch updates when possible and use efficient selectors.</li>
+                <li><strong>Accessibility:</strong> Ensure consent-required messages and conditional content are accessible to screen readers. Use proper ARIA attributes and maintain keyboard navigation.</li>
+                <li><strong>User Experience:</strong> Make it easy for users to update their preferences. Include clear calls-to-action and maintain consistent styling for preference-related UI elements.</li>
+                <li><strong>Testing:</strong> Test your implementation across different browsers and devices. Verify that content visibility changes correctly when consent is updated.</li>
+                <li><strong>Security:</strong> Never store or process personal data without proper consent. Implement proper data handling practices and respect user privacy choices.</li>
+                <li><strong>Documentation:</strong> Maintain clear documentation of which features require which consent categories. This helps with maintenance and ensures compliance.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cookie Preferences Section -->
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="javascript:void(0)" onclick="event.preventDefault(); Osano.cm.showDrawer()" style="color: var(--electric-indigo); text-decoration: underline; font-weight: 500;">Update Cookie Preferences</a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <div class="footer-placeholder"></div>
+
+  <script src="../../scripts/global-nav.js"></script>
+  <script src="../../scripts/main.js"></script>
+  <script src="../../scripts/include-footer.js"></script>
+  
+  <script>
+    // Function to update the page based on consent status
+    function updatePageBasedOnConsent(consent) {
+      if (!consent) return;
+      
+      const nonEssentialCategories = ['ANALYTICS', 'MARKETING', 'PERSONALIZATION'];
+      const statusElements = {
+        'ANALYTICS': document.getElementById('analytics-status'),
+        'MARKETING': document.getElementById('marketing-status'),
+        'PERSONALIZATION': document.getElementById('personalization-status')
+      };
+      
+      // Update individual category status displays
+      let acceptedCount = 0;
+      nonEssentialCategories.forEach(category => {
+        const status = consent[category];
+        if (statusElements[category]) {
+          statusElements[category].textContent = status;
+          statusElements[category].className = status === 'ACCEPT' ? 'status-accepted' : 'status-denied';
+          if (status === 'ACCEPT') acceptedCount++;
+        }
+      });
+      
+      // Update consent summary
+      const consentSummary = document.getElementById('consent-summary');
+      const consentStatus = document.getElementById('consent-status');
+      const puppyContainer = document.getElementById('puppy-container');
+      
+      // Reset all body classes
+      document.body.classList.remove('tint-green', 'tint-red', 'tint-yellow');
+      consentStatus.classList.remove('all-accepted', 'all-denied', 'mixed-consent');
+      
+      // Hide puppy by default
+      puppyContainer.style.display = 'none';
+      
+      // Apply appropriate styling based on consent status
+      if (acceptedCount === nonEssentialCategories.length) {
+        // All categories accepted
+        document.body.classList.add('tint-green');
+        consentStatus.classList.add('all-accepted');
+        consentSummary.textContent = 'You have accepted all non-essential cookie categories. The page has a green tint.';
+        
+        // Show the puppy!
+        puppyContainer.style.display = 'block';
+      } else if (acceptedCount === 0) {
+        // All categories denied
+        document.body.classList.add('tint-red');
+        consentStatus.classList.add('all-denied');
+        consentSummary.textContent = 'You have denied all non-essential cookie categories. The page has a red tint.';
+      } else {
+        // Mixed acceptance
+        document.body.classList.add('tint-yellow');
+        consentStatus.classList.add('mixed-consent');
+        consentSummary.textContent = `You have accepted ${acceptedCount} out of ${nonEssentialCategories.length} non-essential cookie categories. The page has a yellow tint.`;
+      }
+    }
+    
+    // Initialize when Osano is ready
+    Osano.cm.addEventListener('osano-cm-initialized', function(consent) {
+      console.log('Osano initialized with consent:', consent);
+      updatePageBasedOnConsent(consent);
+    });
+    
+    // We're no longer updating when categories are toggled, only when consent is saved
+    // Osano.cm.addEventListener('osano-cm-consent-changed', function(changes) {
+    //   console.log('Consent changed:', changes);
+    //   const currentConsent = Osano.cm.getConsent();
+    //   updatePageBasedOnConsent(currentConsent);
+    // });
+    
+    // Only update when consent is saved
+    Osano.cm.addEventListener('osano-cm-consent-saved', function(consent) {
+      console.log('Consent saved:', consent);
+      updatePageBasedOnConsent(consent);
+    });
+    
+    // Implementation Guide Accordion Functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const accordionToggle = document.querySelector('.accordion-toggle');
+      const accordionContent = document.querySelector('.accordion-content');
+      
+      if (accordionToggle && accordionContent) {
+        accordionToggle.addEventListener('click', function() {
+          // Toggle active class on the button
+          this.classList.toggle('active');
+          
+          // Toggle the content
+          if (accordionContent.classList.contains('active')) {
+            accordionContent.classList.remove('active');
+            accordionContent.style.display = 'none';
+          } else {
+            accordionContent.classList.add('active');
+            accordionContent.style.display = 'block';
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html> 

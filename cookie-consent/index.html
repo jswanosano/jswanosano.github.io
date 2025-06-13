@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cookie Consent Module</title>
+  <link rel="stylesheet" href="../../styles.css" />
+  <link rel="stylesheet" href="cookie-consent.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header alt-header">
+    <h1 class="site-title">Cookie Consent Module</h1>
+    <p class="site-subtitle">Explore Osano's cookie banner implementations—from default recommendations to advanced suppression methods.</p>
+  </header>
+
+  <!-- Global Navigation -->
+  <div class="global-nav-placeholder"></div>
+
+  <!-- Main Content -->
+  <main class="module">
+    <section class="hero">
+      <h2>Available Demo Implementations</h2>
+      <p>Each of the following pages showcases a unique way to integrate and configure Osano's cookie consent banner. Click any option below to view a live implementation.</p>
+    </section>
+
+    <section class="card-grid">
+      <div class="card">
+        <h3 class="card-title">Recommended Installation</h3>
+        <p class="card-description">
+          This demo shows the out-of-the-box Osano cookie banner with default settings. It provides full compliance coverage and is the preferred configuration.
+        </p>
+        <a class="card-link" href="/cookie-consent/recommended-installation"><span>View Recommended Installation</span></a>
+      </div>
+
+      <div class="card">
+        <h3 class="card-title">CSS Customized Installation</h3>
+        <p class="card-description">
+          This version demonstrates how to apply custom CSS styling to the Osano cookie banner while maintaining compliance. Features rounded corners, improved spacing, and hidden cookie widget.
+        </p>
+        <a class="card-link" href="/cookie-consent/css-customized-installation"><span>View CSS Customized Installation</span></a>
+      </div>
+
+      <div class="card">
+        <h3 class="card-title">JavaScript API Consent Demo</h3>
+        <p class="card-description">
+          This page demonstrates how to use the Osano JavaScript API to dynamically update page content based on user consent preferences, with visual feedback based on consent status.
+        </p>
+        <a class="card-link" href="/cookie-consent/js-api-consent-demo"><span>View JavaScript API Demo</span></a>
+      </div>
+
+      <div class="card">
+        <h3 class="card-title">Banner Suppressed via JavaScript API</h3>
+        <p class="card-description">
+          This version hides the banner by default using Osano's JavaScript API, and then selectively reveals it based on jurisdiction. Not recommended for compliance-critical deployments.
+        </p>
+        <a class="card-link" href="/cookie-consent/osano-js-api-banner-suppression"><span>View JS Suppression Demo</span></a>
+      </div>
+
+      <div class="card">
+        <h3 class="card-title">Banner Suppressed via Third-Party API</h3>
+        <p class="card-description">
+          This installation conditionally loads the cookie banner only in allowed regions by checking user IP data through a third-party API. Use with caution.
+        </p>
+        <a class="card-link" href="/cookie-consent/third-party-banner-suppression"><span>View 3rd Party Suppression Demo</span></a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <div class="footer-placeholder"></div>
+
+  <script src="../../scripts/global-nav.js"></script>
+  <script src="../../scripts/cookie-consent/index.js"></script>
+  <script src="../../scripts/include-footer.js"></script>
+</body>
+</html>

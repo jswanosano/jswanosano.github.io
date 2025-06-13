@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cookie Consent (Custom Implementation)</title>
+  <link rel="stylesheet" href="../../styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style id="osano-hide-style">
+    .osano-cm-dialog,
+    .osano-cm-widget {
+          display: none;
+        }    
+  </style>
+
+  <script src="https://cmp.osano.com/AzZcpvRm9bbsqngN/9a87dd5e-e1f7-4263-8666-6565274cb599/osano.js?variant=one"></script>
+</head>
+    
+<body>
+  <!-- Page Header with Subtitle -->
+  <header class="site-header alt-header">
+    <h1 class="site-title">Cookie Consent (Custom Implementation)</h1>
+    <p class="site-subtitle">This page includes an example of the Osano cookie consent manager conditionally loading based on the user's location.</p>
+  </header>
+
+  <!-- Global Navigation -->
+  <div class="global-nav-placeholder"></div>
+
+  <!-- Content Section -->
+  <main class="module">
+    <section class="hero">
+      <h2>What This Implementation Does</h2>
+      <p>This implementation demonstrates how to conditionally display the Osano cookie banner based on user location using the <a href="https://developers.osano.com/cmp/javascript-api/" target="_blank" rel="noopener">Osano JavaScript API</a>.</p>
+    </section>
+
+    <section class="location-debug">
+      <h2>Banner Visibility Debug Info</h2>
+      <p>We have set the banner to be hidden if you access the site from California, Connecticut, Texas, and Canada. The banner should be visible for all other locations. The suppressed/visible locations are customizable.</p>
+      <p><strong>Jurisdiction:</strong> <span id="jurisdiction">Detecting...</span></p>
+      <p><strong>Banner Visibility:</strong> <span id="banner-status">Checking...</span></p>
+    </section>
+
+    <section class="about">
+      <h2>Implementation Details & Caveats</h2>
+      <p>This example hides the Osano banner for users in the specified jurisdictions by default using CSS. Once the user's location is determined, a script checks whether the banner should be displayed. If the user is in a jurisdiction that isn't specified, the script modifies the page's CSS to reveal the banner and programmatically calls `Osano.cm.showDialog()`.</p>
+
+      <p>This implementation is intended for advanced users who want to suppress the banner in U.S. states that currently lack applicable privacy legislation. It is **not recommended by Osano**, and using it may compromise your compliance posture.</p>
+
+      <p>⚠️ <strong>Important Requirements:</strong></p>
+      <ul style="text-align: left; max-width: 800px; margin: 0 auto;">
+        <li>You must enable the <a href="https://docs.osano.com/hc/en-us/articles/22469433588756-US-State-Level-Legislation-Opt-Out-Banner-Format-Setting" target="_blank" rel="noopener">US State Level Legislation Opt Out Banner Format</a> setting in your Osano configuration.</li>
+        <li>This implementation does <strong>not</strong> prevent cookies from loading. It only hides the **visual** appearance of the banner.</li>
+        <li>If you need to conditionally prevent the banner (and script) from loading at all, please visit our <a href="/cookie-consent/third-party-banner-suppression">Third-Party API Suppression</a> page.</li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <div class="footer-placeholder"></div>
+
+  <script src="../../scripts/global-nav.js"></script>
+  <script src="https://jswanosano.github.io/scripts/cookie-consent/osano-js-api-suppression.js"></script>
+  <script src="../../scripts/include-footer.js"></script>
+</body>
+</html>

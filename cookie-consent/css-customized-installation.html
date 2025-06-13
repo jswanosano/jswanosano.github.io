@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cookie Consent (CSS Customized Installation)</title>
+  <link rel="stylesheet" href="../../styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    .osano-cm-info {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 20px;
+      width: 50vw;
+      max-width: 500px;
+      min-width: 320px;
+      min-height: 70vh;
+      max-height: 80vh;
+    }
+    
+    .osano-cm-dialog {
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      justify-content: space-between; /* Align content and buttons horizontally */
+    }
+    
+    .osano-cm-button {
+      border-radius: 20px;
+      font-weight: 500;
+      line-height: 1.5; /* Ensure the text is centered vertically */
+      justify-content: center; /* Center the text horizontally */
+    }
+    
+    .osano-cm-content {
+      max-width: 50%;
+      line-height: 1.5;
+      margin-left: 5%
+    }
+    
+    .osano-cm-widget {
+      display: none;
+    }
+  </style>
+  <script src="https://cmp.osano.com/AzZcpvRm9bbsqngN/9a87dd5e-e1f7-4263-8666-6565274cb599/osano.js"></script>
+</head>
+<body>
+  <!-- Page Header -->
+  <header class="site-header alt-header">
+    <h1 class="site-title">Cookie Consent (CSS Customized Installation)</h1>
+  </header>
+
+  <!-- Global Navigation -->
+  <div class="global-nav-placeholder"></div>
+
+  <!-- Main Content -->
+  <main class="module">
+    <!-- Hero Section -->
+    <section class="hero">
+      <h2>Welcome to Our Website</h2>
+      <p>This site demonstrates a CSS-customized implementation of Osano's Cookie Consent banner.</p>
+    </section>
+
+    <!-- Three-Column Features -->
+    <section class="features">
+      <div class="feature">
+        <h3>Custom Styling</h3>
+        <p>This implementation uses custom CSS to modify the appearance of the cookie consent dialog, buttons, and widget visibility.</p>
+      </div>
+      <div class="feature">
+        <h3>Enhanced User Experience</h3>
+        <p>With rounded corners, improved spacing, and better text alignment, this implementation offers an enhanced visual appearance.</p>
+      </div>
+      <div class="feature">
+        <h3>Hidden Cookie Widget</h3>
+        <p>The floating cookie widget is hidden through CSS, providing a cleaner interface while maintaining all functionality.</p>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+      <h2>Why Use Custom CSS</h2>
+      <p>While Osano's default styling is already compliant and user-friendly, custom CSS allows you to better match your brand's design language and create a more seamless experience for your users. This implementation demonstrates how to customize the consent UI without sacrificing functionality or compliance.</p>
+    </section>
+    
+    <!-- Cookie Preferences Section -->
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="javascript:void(0)" onclick="event.preventDefault(); Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')" style="color: var(--electric-indigo); text-decoration: underline; font-weight: 500;">Cookie Preferences</a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <div class="footer-placeholder"></div>
+
+  <script src="../../scripts/global-nav.js"></script>
+  <script src="../../scripts/main.js"></script>
+  <script src="../../scripts/cookie-consent/default.js"></script>
+  <script src="../../scripts/include-footer.js"></script>
+</body>
+</html> 

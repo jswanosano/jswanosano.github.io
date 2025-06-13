@@ -1,0 +1,30 @@
+/* Custom styles for cookie consent module page */
+
+/* Make the cards wider and ensure consistent height */
+.card-grid .card {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+  position: relative;
+  padding-bottom: 4rem; /* Space for the button */
+}
+
+/* Add consistent padding for card content */
+.card-grid .card .card-title,
+.card-grid .card .card-description {
+  margin-bottom: 1rem;
+}
+
+/* Push the button to the bottom of the card */
+.card-grid .card .card-link {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+}
+
+/* Adjust card hover effect to maintain button position */
+.card-grid .card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+} 
