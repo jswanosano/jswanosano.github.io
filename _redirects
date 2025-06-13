@@ -1,0 +1,9 @@
+/privacy /privacy.html 200
+/privacy-policy /privacy-policy.html 200
+/cookie-consent /cookie-consent/index.html 200
+/cookie-consent/recommended-installation /cookie-consent/recommended-installation.html 200
+/cookie-consent/default /cookie-consent/recommended-installation.html 301
+/cookie-consent/osano-js-api-banner-suppression /cookie-consent/osano-js-api-banner-suppression.html 200
+/cookie-consent/third-party-banner-suppression /cookie-consent/third-party-banner-suppression.html 200
+/dsar /dsar/index.html 200
+/unified-consent /unified-consent/index.html 200 
