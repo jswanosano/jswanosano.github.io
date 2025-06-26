@@ -1,6 +1,9 @@
 # Python script
 sitemap_converter.py
 
+# Sitemap cache
+sitemap_cache.json
+
 # Python cache files
 __pycache__/
 *.py[cod]
