@@ -104,6 +104,18 @@ window.Osano?.cm?.addEventListener('osano-cm-initialized', () =&gt; {
 </code></pre>
       </div>
       <p><em>Note: You can replace the custom message with your own legal or marketing language as needed.</em></p>
+      <div class="info-snippet" style="background:#f5f7fa;border-left:4px solid #3b82f6;padding:1em 1.2em;margin:1.5em 0 0.5em 0;border-radius:6px;">
+        <strong>How to customize for other states or text:</strong>
+        <ul style="margin:0.7em 0 0 1.2em;padding:0;">
+          <li>To target <b>multiple states</b>, change <code>window.Osano?.cm?.jurisdiction === 'us-ca'</code> to something like <code>['us-ca','us-tx','us-ny'].includes(window.Osano?.cm?.jurisdiction)</code>.</li>
+          <li>To target a <b>different state</b>, replace <code>'us-ca'</code> with the desired jurisdiction code (e.g., <code>'us-tx'</code> for Texas).</li>
+          <li>To <b>change the custom banner text</b>, edit the string inside <code>message.textContent = '...'</code> to your preferred message.</li>
+        </ul>
+        <div style="margin-top:0.7em;font-size:0.97em;color:#444;">
+          <b>Example for multiple states:</b><br>
+          <code style="background:#e7eaf0;padding:0.1em 0.4em;border-radius:4px;">if ([ 'us-ca', 'us-tx', 'us-ny' ].includes(window.Osano?.cm?.jurisdiction))</code>
+        </div>
+      </div>
     </section>
   </main>
 
