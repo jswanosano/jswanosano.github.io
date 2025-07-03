@@ -21,6 +21,54 @@
       }
     });
   </script>
+  <style>
+    .codeblock-container {
+      position: relative;
+      margin: 2em 0 1em 0;
+      max-width: 100%;
+    }
+    .codeblock {
+      background: #23272e;
+      color: #f8f8f2;
+      border-radius: 8px;
+      padding: 1.2em 1em 1em 1em;
+      font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
+      font-size: 0.98em;
+      overflow-x: auto;
+      white-space: pre;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      margin: 0;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 0.7em;
+      right: 1em;
+      background: #444b57;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 0.3em 0.8em;
+      font-size: 0.95em;
+      cursor: pointer;
+      transition: background 0.2s;
+      z-index: 2;
+    }
+    .copy-btn:active, .copy-btn.copied {
+      background: #2ecc40;
+      color: #fff;
+    }
+    @media (max-width: 600px) {
+      .codeblock {
+        font-size: 0.92em;
+        padding: 1em 0.5em 0.8em 0.5em;
+      }
+      .copy-btn {
+        top: 0.5em;
+        right: 0.5em;
+        font-size: 0.9em;
+      }
+    }
+  </style>
 </head>
 <body>
   <!-- Page Header -->
@@ -37,7 +85,9 @@
       <h2>Custom Banner Text for California</h2>
       <p>This page demonstrates a standard Osano Cookie Consent configuration, <strong>except that users in California (CA) will see custom language on the consent banner</strong>. All other users see the default Osano banner text.</p>
       <p>To implement this, add the following script <strong>immediately after</strong> your Osano.js script tag:</p>
-      <pre><code>&lt;script&gt;
+      <div class="codeblock-container">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre class="codeblock" id="ca-banner-script"><code>&lt;script&gt;
 window.Osano?.cm?.addEventListener('osano-cm-initialized', () =&gt; {
   if (window.Osano?.cm?.jurisdiction === 'us-ca') {
     const observer = new MutationObserver((mutations, obs) =&gt; {
@@ -52,6 +102,7 @@ window.Osano?.cm?.addEventListener('osano-cm-initialized', () =&gt; {
 });
 &lt;/script&gt;
 </code></pre>
+      </div>
       <p><em>Note: You can replace the custom message with your own legal or marketing language as needed.</em></p>
     </section>
   </main>
@@ -63,5 +114,18 @@ window.Osano?.cm?.addEventListener('osano-cm-initialized', () =&gt; {
   <script src="../../scripts/main.js"></script>
   <script src="../../scripts/cookie-consent/default.js"></script>
   <script src="../../scripts/include-footer.js"></script>
+  <script>
+    function copyCode(btn) {
+      const code = document.getElementById('ca-banner-script').innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        btn.classList.add('copied');
+        btn.textContent = 'Copied!';
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.textContent = 'Copy';
+        }, 1500);
+      });
+    }
+  </script>
 </body>
 </html> 
