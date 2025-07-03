@@ -85,23 +85,26 @@
       <h2>Custom Banner Text for California</h2>
       <p>This page demonstrates a standard Osano Cookie Consent configuration, <strong>except that users in California (CA) will see custom language on the consent banner</strong>. All other users see the default Osano banner text.</p>
       <p>To implement this, add the following script <strong>immediately after</strong> your Osano.js script tag:</p>
-      <div class="codeblock-container">
-        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-        <pre class="codeblock" id="ca-banner-script"><code>&lt;script&gt;
-window.Osano?.cm?.addEventListener('osano-cm-initialized', () =&gt; {
-  if (window.Osano?.cm?.jurisdiction === 'us-ca') {
-    const observer = new MutationObserver((mutations, obs) =&gt; {
-      const message = document.querySelector('.osano-cm-content__message.osano-cm-message');
-      if (message &amp;&amp; message.textContent.includes('This website utilizes technologies')) {
-        message.textContent = 'This is an example of custom jurisdiction-based text for California users only. Feel free to replace this with your own legal or marketing language.';
-        obs.disconnect();
+      <div class="codeblock-container-v3">
+        <div class="codeblock-header-v3">
+          <span class="codeblock-label-v3">JavaScript</span>
+          <button class="copy-btn-v3" onclick="copyCode(this)">Copy</button>
+        </div>
+        <div class="codeblock-v3" id="ca-banner-script">&lt;<span class="js-keyword">script</span>&gt;
+<span class="js-function">window.Osano</span>?.cm?.<span class="js-function">addEventListener</span>(<span class="js-string">'osano-cm-initialized'</span>, <span class="js-keyword">() =&gt;</span> {
+  <span class="js-keyword">if</span> (<span class="js-function">window.Osano</span>?.cm?.jurisdiction <span class="js-operator">===</span> <span class="js-string">'us-ca'</span>) {
+    <span class="js-keyword">const</span> observer = <span class="js-keyword">new</span> <span class="js-class-name">MutationObserver</span>((mutations, obs) =&gt; {
+      <span class="js-keyword">const</span> message = <span class="js-function">document.querySelector</span>(<span class="js-string">'.osano-cm-content__message.osano-cm-message'</span>);
+      <span class="js-keyword">if</span> (message &amp;&amp; message.textContent.<span class="js-function">includes</span>(<span class="js-string">'This website utilizes technologies'</span>)) {
+        message.textContent = <span class="js-string">'This is an example of custom jurisdiction-based text for California users only. Feel free to replace this with your own legal or marketing language.'</span>;
+        obs.<span class="js-function">disconnect</span>();
       }
     });
-    observer.observe(document.body, { childList: true, subtree: true });
+    observer.<span class="js-function">observe</span>(document.body, { childList: <span class="js-boolean">true</span>, subtree: <span class="js-boolean">true</span> });
   }
 });
-&lt;/script&gt;
-</code></pre>
+&lt;/<span class="js-keyword">script</span>&gt;
+        </div>
       </div>
       <p><em>Note: You can replace the custom message with your own legal or marketing language as needed.</em></p>
       <div class="info-snippet" style="background:#f5f7fa;border-left:4px solid #3b82f6;padding:1em 1.2em;margin:1.5em 0 0.5em 0;border-radius:6px;">
@@ -138,6 +141,91 @@ window.Osano?.cm?.addEventListener('osano-cm-initialized', () =&gt; {
         }, 1500);
       });
     }
+  </script>
+  <style>
+    .codeblock-container-v3 {
+      background: #23272e;
+      border-radius: 8px;
+      border: 1px solid #23272e;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      margin: 0 0 2em 0;
+      max-width: 100%;
+      padding: 0;
+    }
+    .codeblock-header-v3 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5em 1em 0.2em 1em;
+      background: #23272e;
+      border-radius: 8px 8px 0 0;
+    }
+    .codeblock-label-v3 {
+      color: #7ecfff;
+      font-size: 0.92em;
+      font-family: 'Jost', 'Roboto', Arial, sans-serif;
+      letter-spacing: 0.04em;
+      font-weight: 500;
+    }
+    .copy-btn-v3 {
+      background: #444b57;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 0.3em 0.9em;
+      font-size: 0.97em;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .copy-btn-v3:active, .copy-btn-v3.copied {
+      background: #2ecc40;
+      color: #fff;
+    }
+    .codeblock-v3 {
+      background: #23272e;
+      color: #f8f8f2;
+      border-radius: 0 0 8px 8px;
+      padding: 1.2em 1em 1em 1em;
+      font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
+      font-size: 1em;
+      white-space: pre-wrap;
+      word-break: break-all;
+      margin: 0;
+      border: none;
+      overflow-x: visible;
+      text-align: left;
+    }
+    .js-keyword { color: #ff7b72; }
+    .js-string { color: #a5d6ff; }
+    .js-function { color: #d2a8ff; }
+    .js-number { color: #f69d50; }
+    .js-comment { color: #8b949e; font-style: italic; }
+    .js-operator { color: #ffab70; }
+    .js-punctuation { color: #fff; }
+    .js-class-name { color: #ffa657; }
+    .js-boolean { color: #ffab70; }
+    @media (max-width: 600px) {
+      .codeblock-v3 {
+        font-size: 0.92em;
+        padding: 1em 0.5em 0.8em 0.5em;
+      }
+      .codeblock-label-v3 {
+        font-size: 0.85em;
+      }
+      .copy-btn-v3 {
+        font-size: 0.9em;
+        padding: 0.3em 0.7em;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+  <script>
+    // Highlight code after page load
+    document.addEventListener('DOMContentLoaded', function() {
+      Prism.highlightAll();
+    });
   </script>
 </body>
 </html> 
