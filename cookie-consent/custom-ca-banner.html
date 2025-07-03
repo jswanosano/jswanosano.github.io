@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cookie Consent with Custom California Banner Text</title>
+  <link rel="stylesheet" href="../../styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://cmp.osano.com/AzZcpvRm9bbsqngN/9a87dd5e-e1f7-4263-8666-6565274cb599/osano.js"></script>
+  <script>
+    window.Osano?.cm?.addEventListener('osano-cm-initialized', () => {
+      if (window.Osano?.cm?.jurisdiction === 'us-ca') {
+        const observer = new MutationObserver((mutations, obs) => {
+          const message = document.querySelector('.osano-cm-content__message.osano-cm-message');
+          if (message && message.textContent.includes('This website utilizes technologies')) {
+            message.textContent = 'This is an example of custom jurisdiction-based text for California users only. Feel free to replace this with your own legal or marketing language.';
+            obs.disconnect();
+          }
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+      }
+    });
+  </script>
+</head>
+<body>
+  <!-- Page Header -->
+  <header class="site-header alt-header">
+    <h1 class="site-title">Cookie Consent: Custom California Banner Text Example</h1>
+  </header>
+
+  <!-- Global Navigation -->
+  <div class="global-nav-placeholder"></div>
+
+  <!-- Main Content -->
+  <main class="module">
+    <section class="hero">
+      <h2>Custom Banner Text for California</h2>
+      <p>This page demonstrates a standard Osano Cookie Consent configuration, <strong>except that users in California (CA) will see custom language on the consent banner</strong>. All other users see the default Osano banner text.</p>
+      <p>To implement this, add the following script <strong>immediately after</strong> your Osano.js script tag:</p>
+      <pre><code>&lt;script&gt;
+window.Osano?.cm?.addEventListener('osano-cm-initialized', () =&gt; {
+  if (window.Osano?.cm?.jurisdiction === 'us-ca') {
+    const observer = new MutationObserver((mutations, obs) =&gt; {
+      const message = document.querySelector('.osano-cm-content__message.osano-cm-message');
+      if (message &amp;&amp; message.textContent.includes('This website utilizes technologies')) {
+        message.textContent = 'This is an example of custom jurisdiction-based text for California users only. Feel free to replace this with your own legal or marketing language.';
+        obs.disconnect();
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
+});
+&lt;/script&gt;
+</code></pre>
+      <p><em>Note: You can replace the custom message with your own legal or marketing language as needed.</em></p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <div class="footer-placeholder"></div>
+
+  <script src="../../scripts/global-nav.js"></script>
+  <script src="../../scripts/main.js"></script>
+  <script src="../../scripts/cookie-consent/default.js"></script>
+  <script src="../../scripts/include-footer.js"></script>
+</body>
+</html> 
